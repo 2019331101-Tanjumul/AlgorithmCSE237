@@ -1,20 +1,35 @@
-/*
-* @Author: Zakaria 
-* @Date:   2022-03-30 17:50:08
-* @Last Modified time: 2022-03-30 18:43:00
-*/
-/*
-* @Author: Zakaria 
-* @Date:   2022-03-30 17:51:06
-* @Last Modified time: 2022-03-30 18:41:49
-*/
-/*
-* @Author: Zakaria
-* @Date:   2021-09-14 15:44:21
-* @Last Modified time: 2022-03-30 01:59:18
-*/
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <queue>
+#include <deque>
+#include <bitset>
+#include <iterator>
+#include <list>
+#include <stack>
+#include <map>
+#include <set>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <limits>
+#include <climits>
+#include <time.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <ctime>
+#include <cassert>
+#include <complex>
+#include <cstring>
 
-#include <bits/stdc++.h>
 #define  pb          push_back
 #define  f           first
 #define  s           second
@@ -22,81 +37,63 @@
 #define  LCM(a,b)    a*b/__gcd(a,b)
 #define  GCD(a,b)    __gcd(a,b)
 #define  mod         1000000007
+#define  test        int t; cin>>t ;while(t--)
 #define  sof         sizeof
 #define  endl        '\n'
-#define  MAX         200002
+#define  MAX         1000002 
+
 typedef long long ll;
 using namespace std;
 
-int cnt[MAX];
-map<pair<int,int> , int >m;
-
-void Solve()
+int partition(int a[], int low, int high)
 {
-         
-         int n,k;
-         cin>>n>>k;
+      int pivot=a[high];
 
-         int a[n];
+      int j,i=low;
 
-         for(int i=0 ; i<n ; i++)
-            cin>>a[i],cnt[a[i]]++, m[{a[i],cnt[a[i]]}]=0;
-         
-         sort(a,a+n);
-
-     
-         for(int i=0 ; i<n ; i++)
+      for(int j=low;j<high;j++)
+      {
+         if(a[j]<=pivot)
          {
-
-                 ll x=a[i];
-                
-                 ll pans=0;
-                 while(x)
-                 {
-                     x/=2;
-                     pans++;
-                     cnt[x]++;
-                     m[{x,cnt[x]}]+=m[{x, cnt[x]-1}]+pans;
-            
-                 }
-                
+            swap(a[i],a[j]);
+            i++;
          }
-       
-         int ans=1e9; 
+      }
+      swap(a[i],a[high]);
 
-         for(int i=1 ; i<=2e5 ; i++)
-         {
-             if(cnt[i]>=k)
-             ans=min(ans, m[{i,k}]);
-         }
-         cout<<ans<<endl;
+      return i;
 
-       
-
-
-
-
-         
 }
 
+void quick_sort(int a[], int low, int high)
+{
+     if(low<high)
+     {
+         int p=partition(a, low, high);// here p is index of pivot
+         
+         quick_sort(a,low,p-1);
+         quick_sort(a,p+1,high);
 
+
+     }
+}
+                    
 int main()
 {
+    
+      ios::sync_with_stdio(false);
+      cin.tie(0); 
+      
+      int a[10]={5, 8, 9, 1, -2, 5, 10, 2, 4, 7};
 
-         ios::sync_with_stdio(false);
-         cin.tie(0);
+      quick_sort(a,0,9);
 
-       
-
-         int tt=1;
-        // cin>>tt;
-         while(tt--)
-         {
-             Solve();
-         }
-       
-          
-     return 0;
-
-
+      for(auto i:a)
+        cout<<i<<" ";
+      
+ 
+return 0;           
+    
+              
 }
+
