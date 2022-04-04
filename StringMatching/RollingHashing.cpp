@@ -1,7 +1,7 @@
 /*
 * @Author: Zakaria 
 * @Date:   2022-04-01 01:08:32
-* @Last Modified time: 2022-04-01 11:58:26
+* @Last Modified time: 2022-04-05 00:30:05
 */
 #include <bits/stdc++.h>
 #define  pb          push_back
@@ -37,13 +37,15 @@ void GenerateHash1(string text)
        for(int i=1 ; i<=text.size() ; i++) //1 base indexing for string
        {
            Hash1[i] = (Hash1[i-1]*Base1 + (text[i-1]-'a'+1) ) % Mod1;
+           Hash1[i]+=Mod1;
+           Hash1[i]%=Mod1;
        }
 
 }
 
 ll GetHash1(int Left , int Right)
 {
-     ll HashValue = Hash1[Right] - (Hash1[Left-1]*Pow1[Right-Left+1])%Mod1 ; //Here pow is base^mod
+      ll HashValue = Hash1[Right] - (Hash1[Left-1]*Pow1[Right-Left+1])%Mod1 ; //Here pow is base^(right-lest+1)%mod
       HashValue+=Mod1;
       HashValue%=Mod1;
 
@@ -55,7 +57,7 @@ ll PatternHash1(string pattern)
 {
      ll x=0;
      for(int i=1 ; i<=pattern.size() ; i++)
-      x = (x*Base1 + (pattern[i-1]-'a'+1))%Mod1;
+      x = (x*Base1 + (pattern[i-1]-'a'+1))%Mod1 , x+=Mod1, x%=Mod1;
      return x;
 }
 
@@ -81,6 +83,8 @@ void GenerateHash2(string text)
        for(int i=1 ; i<=text.size() ; i++) //1 base indexing for string
        {
            Hash2[i] = (Hash2[i-1]*Base2 + (text[i-1]-'a'+1) ) % Mod2;
+           Hash2[i]+=Mod2;
+           Hash2[i]%=Mod2;
        }
 
 }
@@ -99,7 +103,7 @@ ll PatternHash2(string pattern)
 {
      ll x=0;
      for(int i=1 ; i<=pattern.size() ; i++)
-      x = (x*Base2 + (pattern[i-1]-'a'+1))%Mod2;
+      x = (x*Base2 + (pattern[i-1]-'a'+1))%Mod2 , x+=Mod2, x%=Mod2;
      return x;
 }
 int main()

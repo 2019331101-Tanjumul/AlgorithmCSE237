@@ -1,7 +1,7 @@
 /*
 * @Author: Zakaria 
 * @Date:   2022-03-30 17:50:53
-* @Last Modified time: 2022-03-30 20:23:54
+* @Last Modified time: 2022-03-31 03:04:07
 */
 
 
@@ -57,8 +57,7 @@ int main()
       ios::sync_with_stdio(false);
       cin.tie(0); 
    
-   test
-   { 
+   
 
       int n,m,w;
       
@@ -92,7 +91,7 @@ int main()
 
        cout<<ans<<endl;
 
-    }
+    
 
         
     
