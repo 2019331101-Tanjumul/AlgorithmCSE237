@@ -1,14 +1,13 @@
-/*
-* @Author: Zakaria 
-* @Date:   2022-03-31 00:13:56
-* @Last Modified time: 2022-03-31 00:13:56
-*/
+
 Why relaxation n-1 times?
 : Doing k iterations of Bellman Ford only guarantees that 
 dist[i] is the shortest path from s to i using at most k edges. 
 Since the shortest path can need up to V - 1 edges, we need to do it V - 1 times.
 
-  /*struct edge
+#include<bits/stdc++.h>
+using namespace std;
+
+struct edge
 {
    int a,b,cost;
 };
@@ -33,4 +32,4 @@ void solve()
        }
     }
 
-}*/
+}
