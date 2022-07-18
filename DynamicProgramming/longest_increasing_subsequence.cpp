@@ -11,8 +11,8 @@ using namespace std;
 int n, a[N], b[N], f[N], answer=0;
 ///... // enter n and a[] from keyboard
 int main() {
-    int testcas;
-    cin>>testcas;
+    int testcas=1;
+    //cin>>testcas;
     while(testcas--)
     {
         memset(a,0,sizeof a);
@@ -24,11 +24,17 @@ int main() {
         for (int i=1; i<=n; i++)
         {
             f[i]=lower_bound(b+1, b+answer+1, a[i])-b;
-           
+            
             ///maximize(answer, f[i]);
             answer=max(answer, f[i]);
             b[f[i]]=a[i];
         }
+        for(int i=1 ; i<=n ; i++)
+            cout<<f[i]<<" ";
+        cout<<endl;
+        for(int i=1 ; i<=n; i++)
+            cout<<b[i]<<" ";
+        cout<<endl;
       printf("LIS lenght - %d\n", answer);
         ////If you want to print the LIS:
         vector<int> T;
@@ -128,28 +134,37 @@ int main()
        for(int i=0;i<n;i++)
         cin>>a[i];
  
-      vector<int>dp;
- 
+      vector<int>dp, lis;
+      int track[n];
       dp.push_back(a[0]);
+      track[0]=1;
  
       for(int i=1;i<n;i++)
       {
-          if(a[i]>dp[dp.size()-1])
-            dp.push_back(a[i]);
+          if(a[i]>dp.back())
+            dp.push_back(a[i]), track[i]=dp.size();
           else
           {
               int ind=lower_bound(dp.begin(),dp.end(),a[i])-dp.begin();
- 
               dp[ind]=a[i];
+              track[i]=ind+1;
           }
  
       }
- 
- 
-        cout<<dp.size()<<endl;
+        
+      int len=dp.size();
 
-        for(auto i:dp)
-          cout<<i<<" ";
+      for(int i=n-1 ; i>=0 ; i--)
+      {
+        if(track[i]==len)
+            lis.push_back(a[i]), len--;
+      }
+      cout<<dp.size()<<endl;
+      reverse(lis.begin(), lis.end());
+
+      for(auto i:lis)
+        cout<<i<<" ";
+      
 
  
  
